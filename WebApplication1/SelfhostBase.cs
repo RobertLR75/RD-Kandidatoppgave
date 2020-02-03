@@ -3,7 +3,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace WebApplication1
+namespace Service
 {
     /// <summary>
     /// Usage: Extend your Selfhosted entrypoint (Program.cs) and invoke StartService with type of

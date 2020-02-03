@@ -1,4 +1,4 @@
-﻿namespace WebApplication1
+﻿namespace Service
 {
     public class Program : SelfhostBase
     {

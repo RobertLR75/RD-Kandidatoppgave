@@ -1,9 +1,12 @@
 ﻿using Funq;
+using Microsoft.Extensions.Caching.Memory;
+using Repository;
+using Repository.Abstractions;
 using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 
-namespace WebApplication1
+namespace Service
 {
     public class AppHostCommon
     {
@@ -20,12 +23,16 @@ namespace WebApplication1
 
         private void SetupDatabase()
         {
+
             var connectionFactory = new OrmLiteConnectionFactory(":memory:", SqliteDialect.Provider);
             Container.Register<IDbConnectionFactory>(c => connectionFactory);
-
-            var db = new Database();
+            
+            var db = new Repository.Database();
             db.CreateTablesAndTestData(connectionFactory);
-            Container.RegisterAutoWiredAs<Database, IDatabase>();
+            Container.RegisterAutoWiredAs<Repository.Database, Repository.Abstractions.IDatabase>();
+            Container.RegisterAutoWiredAs<MemCache, IMemoryCache>();
+            Container.RegisterAutoWiredAs<PeopleRepository, IPeopleRepository>();
+
         }
 
     }

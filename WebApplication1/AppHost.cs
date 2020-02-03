@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using Funq;
 using ServiceStack;
+using ServiceStack.Api.OpenApi;
+using ServiceStack.Api.Swagger;
 
-namespace WebApplication1
+namespace Service
 {
     public class AppHost : AppHostBase
     {
@@ -14,6 +16,10 @@ namespace WebApplication1
         {
             var serviceInit = new AppHostCommon(this);
             serviceInit.Init();
+            Plugins.Add(new OpenApiFeature
+            {
+                UseBasicSecurity = true,
+            });
         }
     }
 }
